@@ -1,11 +1,19 @@
 //I have to create functions for each time
+const body = document.querySelector('body');
+const timeContainer = document.querySelector('#timeZone');
 
+const appendHours = document.createElement('span');
+const appendMintues = document.createElement('span');
+const appendSeconds = document.createElement('span');
 
 const getHours =()=>{
     const date = new Date();
-    const hours = date.getHours()
-    // console.log(hours)
-    return hours
+    let hours = date.getHours()
+
+    if(hours > 12){
+        hours = hours - 12;
+    }
+    return hours; 
 }
 
 const getMintues= () => {
@@ -29,16 +37,37 @@ const getTime = () => {
     
     const processTime = `${processHours}:${processMintues}:${processSeconds}`
     console.log(processTime)
-    // displayTime(processTime)
+    appendTime(processHours, processMintues, processSeconds)
     // return processTime
 }
 
-// setInterval(()=> {
+function appendTime(hours, mintues, seconds){
+
+
+    appendHours.innerText = `${hours}`
+    appendMintues.innerText = `:${mintues}`
+    appendSeconds.innerText = `:${seconds}`
+
+    timeContainer.append(appendHours ,appendMintues, appendSeconds)
+    body.append(timeContainer)
+}
+
+// const testing = setInterval(()=> {
 //     getTime()
 // }, 1000)
 
+getTime()
 
-getHours();
+const testing =setInterval(()=> {
+    getTime()
+}, 1000)
+
+// setTimeout(()=> {
+//     clearInterval(testing)
+// }, 5000)
+
+
+// getHours();
 // getTime();  
 
 
